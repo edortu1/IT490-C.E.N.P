@@ -37,7 +37,25 @@ function auth ($user, $pass){
 	}
 }
 
-	
+function signup ($user, $pass, $email){
+    global $userdb;
+    $s = "SELECT * from testtable where username = \"$user\" || email = \"$email\"";
+    $t = mysqli_query($userdb, $s);
+
+    if (mysqli_num_rows($t) >= 1)
+    {
+        echo "User/email is already on database.".PHP_EOL;
+        return false;
+    }
+    else
+    {
+        $a = "INSERT INTO testtable(username,password,email) VALUES (\"$user\",\"$pass\",\"$email\")";
+        mysqli_query($userdb, $a);
+        echo "Successfully added User.".PHP_EOL;
+        return true;
+    }
+}
+
 
 
 function requestProcessor($request)
@@ -51,7 +69,10 @@ function requestProcessor($request)
    		 case "login":
 			 auth($request['username'], $request['password']);
 			 break;
-			 
+		case "signup":
+			signup($request['username'],$request['password'],$request['email']);
+                break;
+
 		default:
 			echo "try again";
 	
