@@ -23,8 +23,10 @@
             
 
 		</form>
-       
-    
+       <br>
+<br>
+
+<a href="/IT490-C.E.N.P/register">Don't Have an Account? Click Here to Register!</a>    
 
 	</body>
 
