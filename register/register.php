@@ -1,7 +1,7 @@
 <?php Require_once("../header.html"); ?>
 
 <div id="loginbox">
-	<h1 align="center">Welcome to R.O.P.</h1>
+	<h1 align="center">Welcome to Kaplunk</h1>
 
 <?php
 	require_once('../path.inc');

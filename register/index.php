@@ -7,23 +7,24 @@ Require_once("../header.html");
         
     	<form style="position: relative;" name="register" action="/IT490-C.E.N.P/register/register.php" method="get" onsubmit="return validateForm()">     	
             <p align="center"> Choose a Username:</p>
-        	<input placeholder="Username" autocomplete="on" type="text" name="username">
+        	<input placeholder="Username" required="required"  autocomplete="on" type="text" name="username">
         	<br>
         	<br>
        	 	<p align="center">Please Create a Password: </p>
-       	 	<input align="center"placeholder="Password" autocomplete="on" type="password" name="password">
+       	 	<input align="center"placeholder="Password" required="required"  autocomplete="on" type="password" name="password">
         	<br><br>
             <p align="center">Please Enter E-mail Address:</p>
-        	<input placeholder="E-mail" autocomplete="on" type="text" name="email">
+        	<input placeholder="E-mail" required="required" autocomplete="on" type="text" name="email">
         	<br>
         	<br>
             <br>
 
 
-        <input width="100%" id="submit" name="signin" type="submit" value="Sign In" label="Sign In">
-        <br><p align="center" style="color: red;">*** Your E-mail Address will only be ***  used for sending you <br>Notifications about your packages.</p>
-            <br>
-        </form>  
+        <input width="100%" id="submit" name="signin" type="submit" value="Sign Up" label="Sign Up">
+                    <br>
+	</form>
+<a href="/IT490-C.E.N.P">Sign In</a>
+  
 </div>
 
 <?php
