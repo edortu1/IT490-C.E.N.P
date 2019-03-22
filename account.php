@@ -1,6 +1,6 @@
 <?php
-$hostname = '127.0.0.1';
-$username = 'testuser';
+$hostname = '192.168.1.2';
+$username = 'nick';
 $db = 'testdb';
-$password = '12345678';
+$password = 'pass';
 ?>
