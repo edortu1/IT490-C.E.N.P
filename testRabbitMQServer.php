@@ -6,19 +6,18 @@ require_once('rabbitMQLib.inc');
 
 include ("account.php");
 
-	$userdb = mysqli_connect($hostname, $username, $db);
+	$userdb = mysqli_connect($hostname, $username, $password, $db);
 global $userdb;
-
 function logger($statement)
 {
+$date = date("M,d,Y h:i:s A");
     $logClient = new rabbitMQClient("logger.ini","testServer");
     $request = array();
     $request['type'] = "error";
     $request['LogMessage'] = $statement;
-    file_put_contents('error.log',$request['LogMessage'], FILE_APPEND);
+    file_put_contents('/home/chris/Desktop/error.log',"[".$date."]".$request['LogMessage'].PHP_EOL, FILE_APPEND);
     $response = $logClient->publish($request);
 }
-
 if (mysqli_connect_errno())
 {
 	echo "failed to connect to MySQL: "."\n". mysqli_connect_error();
@@ -35,10 +34,10 @@ function auth ($user, $pass){
 	$t = mysqli_query($userdb, $s);
 
 
-	if (!$t || mysqli_num_rows($t) == 0 )
+	if (mysqli_num_rows($t) == 0 )
 	{
 		echo "User and Password combination not found.".PHP_EOL;
-		$error = "User and Password combination not found.".PHP_EOL;
+	$error = "User and Password combination not found.".PHP_EOL;
 	echo $error;
 	logger($error);
 		return false;
@@ -50,23 +49,22 @@ function auth ($user, $pass){
 	}
 }
 
-
 function signup ($user, $pass, $email){
     global $userdb;
     $s = "SELECT * from testtable where username = \"$user\" || email = \"$email\"";
     $t = mysqli_query($userdb, $s);
-    
-    if (!$t || mysqli_num_rows($t) >= 1)
+
+    if (mysqli_num_rows($t) >= 1)
     {
-	echo "User/email is already on database.".PHP_EOL;
-	return false;
+        echo "User/email is already on database.".PHP_EOL;
+        return false;
     }
     else
     {
-	$a = "INSERT INTO testtable(username,password,email) VALUES (\"$user\",\"$pass\",\"$email\")";
-	mysqli_query($userdb, $a);
-	echo "Successfully added User.".PHP_EOL;
-	return true;
+        $a = "INSERT INTO testtable(username,password,email) VALUES (\"$user\",\"$pass\",\"$email\")";
+        mysqli_query($userdb, $a);
+        echo "Successfully added User.".PHP_EOL;
+        return true;
     }
 }
 
@@ -83,9 +81,10 @@ function requestProcessor($request)
    		 case "login":
 			 auth($request['username'], $request['password']);
 			 break;
-		 case "signup":
-signup($request['username'],$request['password'],$request['email']);
-		break;		
+		case "signup":
+			signup($request['username'],$request['password'],$request['email']);
+                break;
+
 		default:
 			echo "try again";
 	
