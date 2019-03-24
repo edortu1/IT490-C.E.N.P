@@ -44,7 +44,6 @@ function auth ($user, $pass){
 		return false;
 	}
 	else {
-		header('Location:192.168.1.10:3000');
 		echo "Successfully Authenticated.".PHP_EOL;
 		return true;
 
