@@ -2,8 +2,6 @@
 
 A simple UI for searching [themoviedb.org](https://www.themoviedb.org)'s API.
 
-The app can be viewed at [moviebrowser.kunkalabs.com](http://moviebrowser.kunkalabs.com).
-
 ## Overview
 
 This project provides a means of searching for and browsing movies using the TMDB API. A simple user interface is implemented consisting of a "home" view, a "search results" view, and a "movie" view.
@@ -69,7 +67,3 @@ To run the unit tests, run `npm test` from the project root.
 - The original intention was for the "movie" view to be accessible by slug (e.g. `/:movieSlug/`) for nicer human readable URLs. However, it seems that the TMDB `/movies` API can only be queried by ID, hence the `/:id/` URL structure.
 
 - Both autocomplete (with keyboard control), and full paginated search results pages are implemented. Submit the search form to navigate to a results page.
-
----
-
-&copy; Patrick Kunka 2017
