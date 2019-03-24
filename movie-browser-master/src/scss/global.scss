@@ -1,0 +1,13 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: $font-sans;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}

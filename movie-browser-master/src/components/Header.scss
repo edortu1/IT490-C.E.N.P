@@ -1,0 +1,26 @@
+.header {
+    background: $color-light-grey;
+
+}
+
+.header__title > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header__title {
+    @extend %small-uppercase-heading;
+
+    &:hover .header__logo {
+        opacity: 0.5;
+    }
+}
+
+.header__logo {
+    color: $color-tmdb;
+    margin-right: 0.5rem;
+    transition: opacity 150ms;
+    font-size: 1.5rem;
+    position: relative;
+    top: -0.1em;
+}

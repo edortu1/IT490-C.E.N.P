@@ -1,0 +1,30 @@
+{
+  "name": "movie-browser",
+  "version": "0.0.0",
+  "description": "A simple UI for searching The Movie Database",
+  "private": true,
+  "scripts": {
+    "test": "mocha --compilers babel-register ./test/unit.js",
+    "build:webpack": "./node_modules/.bin/webpack",
+    "watch:webpack": "./node_modules/.bin/webpack --watch",
+    "build:css": "node-sass ./src/scss/styles.scss ./dist/css/styles.css",
+    "watch:css": "onchange \"./src/scss/*.scss\" \"./src/components/*.scss\" -- npm run build:css",
+    "build": "npm run build:webpack && npm run build:css",
+    "start": "node ./server.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "chai": "^4.1.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-shallow-deep-equal": "^1.4.6",
+    "create-index": "^2.2.0",
+    "express": "^4.15.3",
+    "mocha": "^3.5.0",
+    "node-sass": "^4.5.3",
+    "onchange": "^3.2.1",
+    "webpack": "^3.4.1"
+  }
+}
