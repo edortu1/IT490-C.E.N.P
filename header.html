@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<style>	
+body{
+	font-family: monospace;                
+            }
+#loginbox{
+	height:200px;;
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	padding-top:150px;
+	align-items: center;
+}	
+	
+#header{
+}
+input{
+	width: 100%;
+}        
+#logo{
+	
+	margin-left:auto;
+	margin-right:auto;
+	width:150px;
+}    
+#topbar{
+	width:100%;
+	height: 75px;
+	position: absolute;
+	top:0px;
+	left: 0px;
+	right: 0px;
+	background-color:#42d901;
+}
+#bottomline{
+	width:90%;
+	height: 1px;
+	position: absolute;
+	bottom:10%;
+	background-color:#000000;
+	left:0px;
+	right:0px;
+	margin-left:5%;
+	margin-right:5%;
+}
+		</style>
+        
+	<script>
+	function validateForm() {
+	var username = document.forms["login"]["username"].value;
+	var password = document.forms["login"]["password"].value;
+	
+	if (username == "") {
+       		alert("Username Cannot be blank");
+        	return false;
+    	}
+        if (password == "") {
+        	alert("Password Cannot be blank");
+        	return false;
+    	}
+        if (email == "") {
+        	alert("An E-mail is required.");
+        	return false;
+    	}
+    	if (email.includes("@") == false){
+    		alert("Please enter a valid email.");
+    		return false;
+	}
+    	if (email.includes(".") == false){
+    	alert("Please enter a valid email.");
+    	return false;
+	}
+               
+        else{
+            return true;
+        }
+} 
+</script>
+        
+</head>
+    	<body>
+<div id="topbar"></div>

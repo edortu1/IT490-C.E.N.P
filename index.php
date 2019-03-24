@@ -23,7 +23,10 @@
             
 
 		</form>
-       
+       <br>
+<br>
+
+<a href="register">Don't Have an Account? Click Here to Register!</a>
     
 
 	</body>

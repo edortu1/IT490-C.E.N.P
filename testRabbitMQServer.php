@@ -6,8 +6,18 @@ require_once('rabbitMQLib.inc');
 
 include ("account.php");
 
-	$userdb = mysqli_connect($hostname, $username, $password, $db);
+	$userdb = mysqli_connect($hostname, $username, $db);
 global $userdb;
+
+function logger($statement)
+{
+    $logClient = new rabbitMQClient("logger.ini","testServer");
+    $request = array();
+    $request['type'] = "error";
+    $request['LogMessage'] = $statement;
+    file_put_contents('error.log',$request['LogMessage'], FILE_APPEND);
+    $response = $logClient->publish($request);
+}
 
 if (mysqli_connect_errno())
 {
@@ -25,19 +35,42 @@ function auth ($user, $pass){
 	$t = mysqli_query($userdb, $s);
 
 
-	if (mysqli_num_rows($t) == 0 )
+	if (!$t || mysqli_num_rows($t) == 0 )
 	{
 		echo "User and Password combination not found.".PHP_EOL;
+		$error = "User and Password combination not found.".PHP_EOL;
+	echo $error;
+	logger($error);
 		return false;
 	}
 	else {
+		header('Location:192.168.1.10:3000');
 		echo "Successfully Authenticated.".PHP_EOL;
 		return true;
 
 	}
 }
 
-	
+
+function signup ($user, $pass, $email){
+    global $userdb;
+    $s = "SELECT * from testtable where username = \"$user\" || email = \"$email\"";
+    $t = mysqli_query($userdb, $s);
+    
+    if (!$t || mysqli_num_rows($t) >= 1)
+    {
+	echo "User/email is already on database.".PHP_EOL;
+	return false;
+    }
+    else
+    {
+	$a = "INSERT INTO testtable(username,password,email) VALUES (\"$user\",\"$pass\",\"$email\")";
+	mysqli_query($userdb, $a);
+	echo "Successfully added User.".PHP_EOL;
+	return true;
+    }
+}
+
 
 
 function requestProcessor($request)
@@ -51,7 +84,9 @@ function requestProcessor($request)
    		 case "login":
 			 auth($request['username'], $request['password']);
 			 break;
-			 
+		 case "signup":
+signup($request['username'],$request['password'],$request['email']);
+		break;		
 		default:
 			echo "try again";
 	
