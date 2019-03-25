@@ -15,7 +15,7 @@ function logger($statement)
     $request = array();
     $request['type'] = "error";
     $request['LogMessage'] = $statement;
-    file_put_contents('error.log',$request['LogMessage'], FILE_APPEND);
+    file_put_contents('/home/chris/Desktop/error.log',$request['LogMessage'], FILE_APPEND);
     $response = $logClient->publish($request);
 }
 
