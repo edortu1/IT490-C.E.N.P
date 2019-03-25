@@ -50,6 +50,35 @@ function auth ($user, $pass){
 	}
 }
 
+function createSession ($user, $skey)
+{
+    global $userdb;
+    $s = "SELECT userid from testtable where username = \"$user\"";
+    $t = mysqli_query($userdb, $s);
+    if(mysqli_num_rows($t) > 0)
+    {
+	$result = mysqli_fetch_row($t);
+	$r = $result[0];
+	$p = "SELECT sessionKey from session where userID = \"$user\"";
+	$q = mysqli_query($userdb, $p);
+	if(mysqli_num_rows($t) > 0)
+	{
+		while($row = mysqli_fetch_assoc($q))
+		{
+			rmSession($row["sessionKey"]);
+		}
+	}
+	$a = "INSERT INTO session(sessionKey, userID) VALUES (\"$skey\",\"$r\")";
+	mysqli_query($userdb, $a);
+	echo "Session created!".PHP_EOL;
+    }
+    else
+    {	
+	$error = "No Session created for user \"$user\"".PHP_EOL;
+	echo $error;
+	logger($error);
+    }
+}
 
 function signup ($user, $pass, $email){
     global $userdb;
@@ -70,7 +99,41 @@ function signup ($user, $pass, $email){
     }
 }
 
+function validate($seskey)
+{
+    global $userdb;
+    $s = "Select * from session where sessionKey = \"$seskey\"";
+    $t = mysqli_query($userdb, $s);
+    if (mysqli_num_rows($t) >= 1)
+    {
+	echo "Session found!".PHP_EOL;
+	return true;
+    }
+    else
+    {
+	echo "Session not found!".PHP_EOL;
+	return false;
+    }
+}
 
+function getUserID($seskey)
+{
+    global $userdb;
+    $s = "Select userID from session where sessionKey = \"$seskey\"";
+    $t = mysqli_query($userdb, $s);
+    if (mysqli_num_rows($t) >= 1)
+    {
+	$result = mysqli_fetch_row($t);
+	$r = $result[0];
+	return $r;
+    }
+    else
+    {
+	$error = "Session key not found in session table, unable to find user ID.".PHP_EOL;
+	echo $error;
+	return false;
+    }
+}
 
 function requestProcessor($request)
 {
@@ -99,4 +162,3 @@ $server->process_requests('requestProcessor');
 echo "testRabbitMQServer END".PHP_EOL;
 exit();
 ?>
-
