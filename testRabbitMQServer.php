@@ -6,7 +6,7 @@ require_once('rabbitMQLib.inc');
 
 include ("account.php");
 
-	$userdb = mysqli_connect($hostname, $username, $db);
+	$userdb = mysqli_connect($hostname, $username, $password, $db);
 global $userdb;
 
 function logger($statement)
