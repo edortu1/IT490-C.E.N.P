@@ -1,5 +1,5 @@
 # Kaplunk
-Kaplunk is a site that will allow users to search for and manage a watchlist of new movies to watch.
+Kaplunk is a site that will allow users to search for and manage a watchlist of new movies to watch, and find new movie recommendations.
 
 ## Features
 - Creating personal user accounts
