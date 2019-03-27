@@ -6,23 +6,29 @@ require_once('rabbitMQLib.inc');
 include ("account.php");
 	$userdb = mysqli_connect($hostname, $username, $password, $db);
 global $userdb;
+
 function logger($statement)
 {
+	$date = date("M,d,Y h:i:s A");
     $logClient = new rabbitMQClient("logger.ini","testServer");
     $request = array();
     $request['type'] = "error";
     $request['LogMessage'] = $statement;
-    file_put_contents('/home/nick/Desktop/error.log',$request['LogMessage'], FILE_APPEND);
+    file_put_contents('/home/nick/Desktop/error.log',"[".$date."]".$reqst['LogMessage'].PHP_EOL, FILE_APPEND);
     $response = $logClient->publish($request);
 }
 if (mysqli_connect_errno())
 {
 	echo "failed to connect to MySQL: "."\n". mysqli_connect_error();
+	$error = "Failed to connect to MySQL.".PHP_EOL;
+	echo $error;
+	logger($error);
 	exit();
 }else
 {
 	echo "Successfully connected to MYSQL."."\n".PHP_EOL;
 }
+
 function auth ($user, $pass){
 	
 	global $userdb;
