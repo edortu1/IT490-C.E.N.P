@@ -19,32 +19,29 @@ $request["message"] = $msg;
 $response = $client->send_request($request);
 if ($response == true)
 {
-	$curl = curl_init();
-                curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.themoviedb.org/3/authentication/token/new?api_key=7ccdb5d63255684fcdd0634087e88578",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET",
-                CURLOPT_POSTFIELDS => "{}",
-        ));
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);      
-        if ($err) {
-                echo "cURL Error #:" . $err;
-        } else {
-                global $token;
-                $token = json_decode($response);
-                echo $token->request_token;
-                echo $response;
-        }
-	global $token;
-	$url = "http://10.0.2.15:3000";
-                header('Location: '.$url); 
-}else
-{
-	echo "you're wrong";
+$key = SHA1($_GET["username"].time());
+$sessionkey = $key;
+
+$cookie_name = "sessionkey";
+$cookie_value = $sessionkey;
+
+setcookie($cookie_name, $sessionkey);
+
+
+
+$request = array();
+$request['type'] = "create_session";
+$request['username'] = $_GET["username"];
+$request['sessionkey'] = $sessionkey;
+$response = $client->publish($request);
+
+echo '<p style="font-size:30px; color: green" align="center">Logged In Successfully.';
+echo '<p style="font-size:20px; align="center">Redirecting to Search Page.';
+header( "Refresh:2; http://25.8.187.190:3000", true, 303);
 }
+else{
+echo '<p style="font-size:30px; color: red" align=center>Login Declined</p>';
+echo '<p style="font-size:20px; align="center">Redirecting to Login Page.';
+header( "Refresh:2; url=/IT490-C.E.N.P", true, 303);
+}
+?>

@@ -6,7 +6,6 @@ require_once('rabbitMQLib.inc');
 include ("account.php");
 	$userdb = mysqli_connect($hostname, $username, $password, $db);
 global $userdb;
-
 function logger($statement)
 {
 	$date = date("M,d,Y h:i:s A");
@@ -14,7 +13,7 @@ function logger($statement)
     $request = array();
     $request['type'] = "error";
     $request['LogMessage'] = $statement;
-    file_put_contents('/home/nick/Desktop/error.log',"[".$date."]".$reqst['LogMessage'].PHP_EOL, FILE_APPEND);
+    file_put_contents('/home/nick/Desktop/error.log',"[".$date."]".$request['LogMessage'].PHP_EOL, FILE_APPEND);
     $response = $logClient->publish($request);
 }
 if (mysqli_connect_errno())
@@ -28,7 +27,6 @@ if (mysqli_connect_errno())
 {
 	echo "Successfully connected to MYSQL."."\n".PHP_EOL;
 }
-
 function auth ($user, $pass){
 	
 	global $userdb;
@@ -47,7 +45,7 @@ function auth ($user, $pass){
 		return true;
 	}
 }
-/*
+
 function createSession ($user, $skey)
 {
     global $userdb;
@@ -77,7 +75,7 @@ function createSession ($user, $skey)
 	logger($error);
     }
 }
-*/
+
 function signup ($user, $pass, $email){
     global $userdb;
     $s = "SELECT * from testtable where username = \"$user\" || email = \"$email\"";
@@ -96,8 +94,8 @@ function signup ($user, $pass, $email){
 	return true;
     }
 }
-/*
-function validate($seskey)
+
+function doValidate($seskey)
 {
     global $userdb;
     $s = "Select * from session where sessionKey = \"$seskey\"";
@@ -113,25 +111,14 @@ function validate($seskey)
 	return false;
     }
 }
-function getUserID($seskey)
+
+function rmSession($seskey) 
 {
     global $userdb;
-    $s = "Select userID from session where sessionKey = \"$seskey\"";
+    $s = "Delete from session where sessionKey = \"$seskey\"";
     $t = mysqli_query($userdb, $s);
-    if (mysqli_num_rows($t) >= 1)
-    {
-	$result = mysqli_fetch_row($t);
-	$r = $result[0];
-	return $r;
-    }
-    else
-    {
-	$error = "Session key not found in session table, unable to find user ID.".PHP_EOL;
-	echo $error;
-	return false;
-    }
 }
-*/
+
 function requestProcessor($request)
 {
   echo "received request".PHP_EOL;
@@ -141,11 +128,15 @@ function requestProcessor($request)
  	 switch ($request['type'])
   {
    		 case "login":
-			 auth($request['username'], $request['password']);
-			 break;
+			return auth($request['username'], $request['password']);
 		 case "signup":
-signup($request['username'],$request['password'],$request['email']);
-		break;		
+			return signup($request['username'],$request['password'],$request['email']);
+    		case "create_session":
+      			createSession($request['username'], $request['sessionkey']);
+    		case "validate_session":
+      			return doValidate($request['sessionID']);
+    		case "remove_session":
+      			rmSession($request['sessionID']);	
 		default:
 			echo "try again";
 	
