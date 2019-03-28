@@ -17,7 +17,7 @@ function requestProcessor($request)
     return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 
-$server = new rabbitMQServer("errorServer.ini","errorServer");
+$server = new rabbitMQServer("logger.ini","testServer");
 echo "Error Server has started.".PHP_EOL;
 $server->process_requests('requestProcessor');
 echo "Error Server has stopped.".PHP_EOL;
