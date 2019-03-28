@@ -15,7 +15,7 @@ class Header extends Component {
 <p align="right">
 <a href="logout.php">Log Out</a>
 </p>
-<a href="/25.44.217.166/IT490-C.E.N.P/Tanle_Responsive_v2">Watchlist</a>
+<a href="http://25.44.217.166/IT490-C.E.N.P/Table_Responsive_v2">Watchlist</a>
                 </div>
             </header>`
         );
