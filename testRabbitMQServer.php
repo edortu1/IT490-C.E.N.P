@@ -6,6 +6,7 @@ require_once('rabbitMQLib.inc');
 include ("account.php");
 	$userdb = mysqli_connect($hostname, $username, $password, $db);
 global $userdb;
+
 function logger($statement)
 {
 	$date = date("M,d,Y h:i:s A");
@@ -27,6 +28,7 @@ if (mysqli_connect_errno())
 {
 	echo "Successfully connected to MYSQL."."\n".PHP_EOL;
 }
+
 function auth ($user, $pass){
 	
 	global $userdb;
