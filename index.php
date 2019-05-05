@@ -16,10 +16,10 @@
         console.log('Family Name: ' + profile.getFamilyName());
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail());
-
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
+	window.location.href="http://127.0.0.1/IT490-C.E.N.P/login.php?id_token="+id_token;
       }
     </script>
   </body>
@@ -43,7 +43,7 @@ if(isset($_COOKIE["sessionkey"])) {
 	$request['sessionID'] = $_COOKIE["sessionkey"];
 	$response = $client->send_request($request);
 	if ($response == true){
-    		header("Location: http://25.8.187.190:3000");
+    		header("Location: http://25.8.187.190/IT490-C.E.N.P/movieSearch.php");
 	} 
 }
 ?>
