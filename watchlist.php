@@ -84,9 +84,9 @@ $r = mysqli_query($conn, $q);
         $jResponse = json_decode($response, true);
         if (empty($jResponse['results'])) {
 ?>
-               <!-- <scripti>
-                  //  alert("Couldn't find a Trailer for movie");
-		</script> --!>
+                <scripti>
+                   alert("Couldn't find a Trailer for movie");
+		</script>
 <?php
 	//	print_r($jResponse);
         }else{
