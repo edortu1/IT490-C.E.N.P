@@ -1,0 +1,62 @@
+2/2/19
+Cloned test files given to us by professor
+Set configuration files to work with our network for testing
+Tested sample message sending across local network via RabbitMQ
+
+2/12/19
+Created sample login page for testing
+Created SQL DB tables to hold user account information
+
+2/28/19
+Pushed code for working user authentication
+Created registration page
+Created script to handle user registration
+
+3/5/19
+Tested user authentication and registration across local network
+
+3/24/19
+Pushed code for error logging capability
+Tested errors to ensure logging functionality
+
+3/25/19
+Pushed code for testing API integration
+
+3/26/19
+Tested sample redirection code
+
+3/27/19
+Modified login script to handle session keys
+Created DB table to hold session key information
+Successfully implemented redirection to sample API search page after user authentication
+Created button linking to user watchlist page
+Created sample list to be populated by user watchlist data
+
+4/10/19
+Created better API search page to store movie information on local DB
+Cleaned up some testing code
+
+4/26/19
+Pushed test button for Google Sign In integration
+Create OAuth tokens for users
+
+5/5/19
+Cleaned up URL's to point to correct locations
+
+5/9/29
+Pushed code for now fully working user watchlist functionality
+
+5/10/19
+Set up fully functional DB replication with master-slave
+Configured network firewalls on important servers
+Began work on server documentation
+Tested code for deployment system
+Configured Systemd monitoring
+Preliminary stages of NAGIOS monitoring
+
+5/11/19
+Installed OSSIM for security report
+Configured HSB servers for all production machines
+Created server clusters
+Further progress on deployment system
+Further progress on Google Sign In integration
