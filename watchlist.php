@@ -1,6 +1,7 @@
 <form method="post" action="" id="form">
                  <input type ="hidden" id="kaplunk" name="kaplunk" value="kaplunk">
                  <button>KAPLUNK</button>
+		<p align="right"><input type="button" onclick="location.href = 'movieSearch.php';" value="Home"/></p>
                  </form>
 <?php
 require_once('path.inc');
