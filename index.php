@@ -34,7 +34,7 @@
 	<body>
 
 	
-		<h1 id="signUp">Sign In</h1>
+		<h1 id="signUp">Kaplunk sign In</h1>
 
 		<form method="get" action="login.php">
 
