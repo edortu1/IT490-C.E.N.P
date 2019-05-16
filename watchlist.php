@@ -2,6 +2,7 @@
                  <input type ="hidden" id="kaplunk" name="kaplunk" value="kaplunk">
                  <button>KAPLUNK</button>
 		<p align="right"><input type="button" onclick="location.href = 'movieSearch.php';" value="Home"/></p>
+	        <center><input type="button" onclick="location.href = 'https://www.fandango.com/';" value="Buy Tickets"/></center>
                  </form>
 <?php
 require_once('path.inc');
